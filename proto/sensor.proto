@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package telemetry.v1;
 
+option go_package = "sensor-node/pkg/pb";
 
 service SensorService {
   rpc SendReading(SensorReading) returns (SendReadingResponse);
