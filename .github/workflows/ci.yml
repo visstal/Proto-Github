@@ -1,0 +1,23 @@
+name: Proto Validation
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+      
+    - name: Setup Protocol Buffer Compiler
+      uses: arduino/setup-protoc@v3
+      with:
+        version: '25.x'
+        
+    - name: Validate proto files
+      run: |
+        find . -name "*.proto" -exec protoc --proto_path=. --descriptor_set_out=/dev/null {} \;
